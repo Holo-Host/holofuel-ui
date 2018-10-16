@@ -60,10 +60,10 @@ class Account extends Component {
                             <Table className={classes.table}>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell numeric className="text-right font-bold">Assets</TableCell>
-                                        <TableCell numeric>Current</TableCell>
-                                        <TableCell numeric>Limits</TableCell>
-                                        <TableCell numeric>Available</TableCell>
+                                        <TableCell className="text-right font-bold">Assets</TableCell>
+                                        <TableCell className="text-right font-bold">Current</TableCell>
+                                        <TableCell className="text-right font-bold">Limits</TableCell>
+                                        <TableCell className="text-right font-bold">Available</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -73,9 +73,9 @@ class Account extends Component {
                                                 <TableCell component="th" scope="row" className="text-right">
                                                     {row.name}
                                                 </TableCell>
-                                                <TableCell numeric className="text-right">{row.a}</TableCell>
-                                                <TableCell numeric className="text-right">{row.b}</TableCell>
-                                                <TableCell numeric className="text-right">{row.c}</TableCell>
+                                                <TableCell className="text-right">{row.a}</TableCell>
+                                                <TableCell className="text-right">{row.b}</TableCell>
+                                                <TableCell className="text-right">{row.c}</TableCell>
                                             </TableRow>
                                         );
                                     })}

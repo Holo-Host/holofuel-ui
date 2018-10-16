@@ -62,20 +62,20 @@ class Transactions extends Component {
                             <Table className={classes.table}>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell string className="text-right font-bold">Time</TableCell>
-                                        <TableCell string>Amount</TableCell>
-                                        <TableCell string>From/To</TableCell>
-                                        <TableCell string>Notes</TableCell>
+                                        <TableCell className="font-bold">Time</TableCell>
+                                        <TableCell className="font-bold">Amount</TableCell>
+                                        <TableCell className="font-bold">From/To</TableCell>
+                                        <TableCell className="font-bold">Notes</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {rows.map(row => {
                                         return (
                                             <TableRow key={row.id}>
-                                                <TableCell string>{row.a}</TableCell>
-                                                <TableCell string>{row.b}</TableCell>
-                                                <TableCell string>{row.c}</TableCell>
-                                                <TableCell string>{row.d}</TableCell>
+                                                <TableCell>{row.a}</TableCell>
+                                                <TableCell>{row.b}</TableCell>
+                                                <TableCell>{row.c}</TableCell>
+                                                <TableCell>{row.d}</TableCell>
                                             </TableRow>
                                         );
                                     })}
