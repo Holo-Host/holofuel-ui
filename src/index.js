@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import history from './history';
 import './react-table-defaults';
 import './styles/index.css';
+import './fake-db/fake-db'
+
 import JssProvider from 'react-jss/lib/JssProvider';
 import {create} from 'jss';
 import {createGenerateClassName, jssPreset} from '@material-ui/core/styles';
@@ -20,7 +22,6 @@ import MainFooter from './main/MainFooter';
 import jssExtend from 'jss-extend'
 import QuickPanel from 'main/quickPanel/QuickPanel';
 import store from 'store';
-import SettingsPanel from 'main/SettingsPanel';
 import {Auth} from 'auth';
 
 const jss = create({
@@ -57,9 +58,6 @@ ReactDOM.render(
                                         <QuickPanel/>
                                     </React.Fragment>
                                 }
-                                contentWrapper={
-                                    <SettingsPanel/>
-                                }
                             >
                             </FuseLayout>
                         </FuseTheme>
@@ -71,3 +69,9 @@ ReactDOM.render(
     , document.getElementById('root'));
 
 registerServiceWorker();
+
+/*
+contentWrapper={
+    <SettingsPanel/>
+}
+*/

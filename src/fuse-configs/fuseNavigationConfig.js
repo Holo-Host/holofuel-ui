@@ -1,17 +1,25 @@
 export const fuseNavigationConfig = [
     {
-        'id'      : 'applications',
-        'title'   : 'Applications',
+        'id'      : 'HoloPal',
+        'title'   : 'HoloPal',
         'type'    : 'group',
-        'icon'    : 'apps',
+        'icon'    : 'details',
         'children': [
             {
-                'id'   : 'example-component',
-                'title': 'Example',
+                'id'   : 'account',
+                'title': 'Account',
                 'type' : 'item',
-                'icon' : 'whatshot',
-                'url'  : '/example'
-            }
+                'icon' : 'memory',
+                'url'  : '/account'
+            },
         ]
+    },
+    {
+        'id'   : 'coming-soon',
+        'title': 'Coming Soon',
+        'type' : 'item',
+        'icon' : 'alarm',
+        'url'  : '/pages/coming-soon'
     }
+
 ];
