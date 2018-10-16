@@ -5,9 +5,10 @@ import {pagesConfigs} from 'main/content/pages/pagesConfigs';
 import {SystemConfig} from 'main/content/system/SystemConfig';
 import {ComponentsConfig} from 'main/content/components/ComponentsConfig';
 import {AccessConfig} from 'main/content/access/AccessConfig';
-import {TransactionsConfig} from 'main/content/transactions/TransactionsConfig';
 
 import {AccountConfig} from 'main/content/account/AccountConfig';
+import {TransactionsConfig} from 'main/content/transactions/TransactionsConfig';
+import {SendConfig} from 'main/content/send/SendConfig';
 
 const routeConfigs = [
     ...pagesConfigs,
@@ -15,7 +16,8 @@ const routeConfigs = [
     AccountConfig,
     SystemConfig,
     AccessConfig,
-    TransactionsConfig
+    TransactionsConfig,
+    SendConfig
 ];
 
 export const routes = [

@@ -5,4 +5,5 @@ import './knowledge-base-db';
 import './chat-db';
 import './sys-db';
 import './users-db';
+import './send-db';
 mock.onAny().passThrough();
