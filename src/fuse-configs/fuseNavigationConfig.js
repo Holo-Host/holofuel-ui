@@ -12,6 +12,13 @@ export const fuseNavigationConfig = [
                 'icon' : 'memory',
                 'url'  : '/account'
             },
+            {
+                'id'   : 'transactions',
+                'title': 'Transactions',
+                'type' : 'item',
+                'icon' : 'memory',
+                'url'  : '/Transactions'
+            }
         ]
     },
     {

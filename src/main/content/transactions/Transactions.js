@@ -15,22 +15,24 @@ const styles = theme => ({
 });
 
 let id = 0;
-function createData(name, a, b, c) {
+function createData(a, b, c, d) {
   id += 1;
-  return { id, name, a, b, c };
+  return { id, a, b, c, d };
 }
-const some = "1.000000";
-const none = "0.000000";
-const na = "N/A";
+const time = "01/01/2019";
+const amount = "$100";
+const from = "Account A";
+const to = "Account B";
+const note = "note";
 const rows = [
-    createData('Balance', none, na, none),
-    createData('Credit', some, na, some),
-    createData('Spendable', some, na, some),
-    createData('Fees', none, na, none),
+    createData(time, amount, from, note),
+    createData(time, amount, to, note),
+    createData(time, amount, from, note),
+    createData(time, amount, to, note),
 ];
 
 
-class Account extends Component {
+class Transactions extends Component {
 
     render()
     {
@@ -45,7 +47,7 @@ class Account extends Component {
                     <div className="p-24"><h4>Holo</h4></div>
                 }
                 contentToolbar={
-                    <div className="px-24"><h4>Account</h4></div>
+                    <div className="px-24"><h4>Transactions</h4></div>
                 }
                 content={
                     <div className="p-24">
@@ -53,29 +55,27 @@ class Account extends Component {
                             Account: Qmc7GEPmhWZJuFuDGDbx8rq1P3h7EqUZB23H2zsBJ9XtXH
                         </p>
                         <br/>
-                        <h2 className="text-center">Balances (Net of Limits)</h2>
+                        <h2 className="text-center">Transactions</h2>
                         <br/>
 
                         <Paper className={classes.root}>
                             <Table className={classes.table}>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell numeric className="text-right font-bold">Assets</TableCell>
-                                        <TableCell numeric>Current</TableCell>
-                                        <TableCell numeric>Limits</TableCell>
-                                        <TableCell numeric>Available</TableCell>
+                                        <TableCell string className="text-right font-bold">Time</TableCell>
+                                        <TableCell string>Amount</TableCell>
+                                        <TableCell string>From/To</TableCell>
+                                        <TableCell string>Notes</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {rows.map(row => {
                                         return (
                                             <TableRow key={row.id}>
-                                                <TableCell component="th" scope="row" className="text-right">
-                                                    {row.name}
-                                                </TableCell>
-                                                <TableCell numeric className="text-right">{row.a}</TableCell>
-                                                <TableCell numeric className="text-right">{row.b}</TableCell>
-                                                <TableCell numeric className="text-right">{row.c}</TableCell>
+                                                <TableCell string>{row.a}</TableCell>
+                                                <TableCell string>{row.b}</TableCell>
+                                                <TableCell string>{row.c}</TableCell>
+                                                <TableCell string>{row.d}</TableCell>
                                             </TableRow>
                                         );
                                     })}
@@ -90,4 +90,4 @@ class Account extends Component {
     }
 }
 
-export default withStyles(styles, {withTheme: true})(Account);
+export default withStyles(styles, {withTheme: true})(Transactions);

@@ -3,8 +3,9 @@ import {Redirect} from 'react-router-dom';
 import {FuseUtils} from '@fuse/index';
 import {pagesConfigs} from 'main/content/pages/pagesConfigs';
 import {SystemConfig} from 'main/content/system/SystemConfig';
-import {AccessConfig} from 'main/content/access/AccessConfig';
 import {ComponentsConfig} from 'main/content/components/ComponentsConfig';
+import {AccessConfig} from 'main/content/access/AccessConfig';
+import {TransactionsConfig} from 'main/content/transactions/TransactionsConfig';
 
 import {AccountConfig} from 'main/content/account/AccountConfig';
 
@@ -13,7 +14,8 @@ const routeConfigs = [
     ComponentsConfig,
     AccountConfig,
     SystemConfig,
-    AccessConfig
+    AccessConfig,
+    TransactionsConfig
 ];
 
 export const routes = [
