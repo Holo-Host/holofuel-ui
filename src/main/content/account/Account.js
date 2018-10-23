@@ -35,8 +35,10 @@ const rows = [
 class Account extends Component {
 
     state = {
+        maxCreditLimit: '',
+        maxTransactionAmount: '',
+        maxTransactionFee: '',
         selfHash: '',
-        info: {}
     };
 
     componentDidMount()
@@ -44,16 +46,28 @@ class Account extends Component {
         axios.get('http://localhost:3141/fn/transaction/getSystemInfo').then(res => {
             console.log(res.data);
             this.setState({
-                info: res.data,
-                selfHash: res.data.selfHash
+                maxCreditLimit: res.data.maxCreditLimit,
+                maxTransactionAmount: res.data.maxTransactionAmount,
+                maxTransactionFee: res.data.maxTransactionFee,
+                selfHash: res.data.selfHash,
             });
         });
         ;
     }
 
+    /*
+    {info[0].map(infoItem => {
+        return (
+            <li>{infoItem}</li>
+        );
+    })}
+    */
+
     render()
     {
-        const {info} = this.state;
+        const {maxCreditLimit} = this.state;
+        const {maxTransactionAmount} = this.state;
+        const {maxTransactionFee} = this.state;
         const {selfHash} = this.state;
         const {classes} = this.props;
 
@@ -70,36 +84,24 @@ class Account extends Component {
                 }
                 content={
                     <div className="p-24">
-                        <h2 className="text-center">Balances (Net of Limits)</h2>
+                        <h2 className="text-center">Account Info</h2>
                         <br/>
-
                         <Paper className={classes.root}>
                             <Table className={classes.table}>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell className="text-right font-bold">Assets</TableCell>
-                                        <TableCell className="text-right font-bold">Current</TableCell>
-                                        <TableCell className="text-right font-bold">Limits</TableCell>
-                                        <TableCell className="text-right font-bold">Available</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.map(row => {
-                                        return (
-                                            <TableRow key={row.id}>
-                                                <TableCell component="th" scope="row" className="text-right">
-                                                    {row.name}
-                                                </TableCell>
-                                                <TableCell className="text-right">{row.a}</TableCell>
-                                                <TableCell className="text-right">{row.b}</TableCell>
-                                                <TableCell className="text-right">{row.c}</TableCell>
-                                            </TableRow>
-                                        );
-                                    })}
-                                </TableBody>
+                                <TableRow>
+                                    <TableCell>maxCreditLimit</TableCell>
+                                    <TableCell>{maxCreditLimit.display}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>maxTransactionAmount</TableCell>
+                                    <TableCell>{maxTransactionAmount.display}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>maxTransactionFee</TableCell>
+                                    <TableCell>{maxTransactionFee.display}</TableCell>
+                                </TableRow>
                             </Table>
                         </Paper>
-
                     </div>
                 }
             />
