@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withStyles} from '@material-ui/core/styles';
+import axios from 'axios/index';
 import {FusePageSimple} from '@fuse';
 
 import Table from '@material-ui/core/Table';
@@ -8,6 +9,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+
+import {Button} from '@material-ui/core';
+import {TextFieldFormsy} from '@fuse';
+import Formsy from 'formsy-react';
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 
 const styles = theme => ({
@@ -19,23 +27,50 @@ function createData(a, b, c, d) {
   id += 1;
   return { id, a, b, c, d };
 }
-const time = "01/01/2019";
-const amount = "$100";
-const from = "Account A";
-const to = "Account B";
-const note = "note";
-const rows = [
-    createData(time, amount, from, note),
-    createData(time, amount, to, note),
-    createData(time, amount, from, note),
-    createData(time, amount, to, note),
-];
-
 
 class Transactions extends Component {
 
+    state = {
+        canSubmit: false,
+        commandResult: 'Send Result',
+        sendAmount: '',
+        rows: []
+    };
+
+    disableButton = () => {
+        this.setState({canSubmit: false});
+    };
+
+    enableButton = () => {
+        this.setState({canSubmit: true});
+    };
+
+    onSubmit = (model) => {
+        console.info('submit', model);
+
+        var date = new Date();
+        var newdate= (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+        const newRow = createData(newdate, model.sendAmount, model.to, model.note);
+        const newRows = this.state.rows.slice();
+        newRows.push(newRow);
+        this.setState({
+            rows: newRows
+        });
+
+        axios.get('/api/send/' + model.to).then(res => {
+            this.setState({
+                    commandResult: "You sent " + model.sendAmount + " to " + model.to
+            });
+        });
+        ;
+    };
+
     render()
     {
+        const {canSubmit} = this.state;
+        const {commandResult} = this.state;
+        const {rows} = this.state;
+
         const {classes} = this.props;
 
         return (
@@ -69,9 +104,9 @@ class Transactions extends Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rows.map(row => {
+                                    {rows.map((row, index) => {
                                         return (
-                                            <TableRow key={row.id}>
+                                            <TableRow key={index}>
                                                 <TableCell>{row.a}</TableCell>
                                                 <TableCell>{row.b}</TableCell>
                                                 <TableCell>{row.c}</TableCell>
@@ -83,7 +118,72 @@ class Transactions extends Component {
                             </Table>
                         </Paper>
 
+                        <br/>
+                        <br/>
+                        <div>
+                            <Formsy
+                                onValidSubmit={this.onSubmit}
+                                onValid={this.enableButton}
+                                onInvalid={this.disableButton}
+                                ref={(form) => this.form = form}
+                            >
+                                <div>
+                                    <span>To:</span>
+                                    <TextFieldFormsy
+                                        className="mb-24"
+                                        type="text"
+                                        name="to"
+                                        label="Hash"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <TextFieldFormsy
+                                        className="mb-24"
+                                        type="text"
+                                        name="sendAmount"
+                                        label="0.00"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <TextFieldFormsy
+                                        className="mb-24"
+                                        type="text"
+                                        name="note"
+                                        label="Note"
+                                    />
+                                </div>
+
+                                <Chip
+                                    avatar={
+                                        <Avatar>
+                                            <NavigateNextIcon />
+                                        </Avatar>
+                                    }
+                                    label={commandResult}
+                                    className={classes.chip}
+                                    color="secondary"
+                                    variant="outlined"
+                                />
+                                <br/>
+
+                                <Button
+                                    type="submit"
+                                    variant="raised"
+                                    color="primary"
+                                    className="mx-auto mt-16"
+                                    aria-label="command"
+                                    disabled={!canSubmit}
+                                >
+                                    Can submit
+                                </Button>
+                            </Formsy>
+
+                        </div>
+
                     </div>
+
                 }
             />
         )

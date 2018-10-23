@@ -29,9 +29,10 @@ export function command(command)
 class Send extends Component {
 
     state = {
+        data: [],
         canSubmit: false,
-        data      : [],
-        commandResult: 'Send Result'
+        commandResult: 'Send Result',
+        sendAmount: ''
     };
 
     componentDidMount()
@@ -51,9 +52,12 @@ class Send extends Component {
 
     onSubmit = (model) => {
         console.info('submit', model);
+        this.setState({amount: model.amount});
+
         axios.get('/api/send/' + model.to).then(res => {
             console.log(res.data);
-            this.setState({commandResult: res.data});
+            this.setState({commandResult: "You sent " + model.sendAmount + " to " + model.to });
+//            this.setState({commandResult: res.data});
         });
         //let delay = (time) => (result) => new Promise(resolve => setTimeout(() => resolve(result), time));
         /*
@@ -76,9 +80,9 @@ class Send extends Component {
 
     render()
     {
-        const {data} = this.state;
         const {canSubmit} = this.state;
         const {commandResult} = this.state;
+        const {sendAmount} = this.state;
         const {classes} = this.props;
 
         return (
@@ -119,7 +123,7 @@ class Send extends Component {
                                     <TextFieldFormsy
                                         className="mb-24"
                                         type="text"
-                                        name="amount"
+                                        name="sendAmount"
                                         label="0.00"
                                         required
                                     />
@@ -133,23 +137,24 @@ class Send extends Component {
                                     />
                                 </div>
 
-                              <Chip
-                                avatar={
-                                  <Avatar>
-                                    <NavigateNextIcon />
-                                  </Avatar>
-                                }
-                                label={commandResult}
-                                className={classes.chip}
-                                color="secondary"
-                                variant="outlined"
-                              />
-                            <br/>
+                                <Chip
+                                    avatar={
+                                        <Avatar>
+                                            <NavigateNextIcon />
+                                        </Avatar>
+                                    }
+                                    label={commandResult}
+                                    className={classes.chip}
+                                    color="secondary"
+                                    variant="outlined"
+                                />
+                                [{sendAmount}]
+                                <br/>
 
-                            <Button
-                                type="submit"
-                                variant="raised"
-                                color="primary"
+                                <Button
+                                    type="submit"
+                                    variant="raised"
+                                    color="primary"
                                 className="mx-auto mt-16"
                                 aria-label="command"
                                 disabled={!canSubmit}

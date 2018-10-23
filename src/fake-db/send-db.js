@@ -13,9 +13,6 @@ const send = [
     }
 ];
 
-const success = "You sent {amount} to {recipient}";
-const fail = "You did NOT send {amount} to {recipient}";
-
 mock.onGet('/api/send').reply((config) => {
     return [200, send];
 });
@@ -25,6 +22,12 @@ mock.onGet('/api/send/success').reply((config) => {
     return [200, successMsg];
 });
 
+mock.onPost('/api/send/success').reply((request) => {
+    let successMsg = "You sent {amount} to {recipient}";
+    return [200, successMsg];
+});
+
 mock.onGet('/api/send/fail').reply((config) => {
+    const fail = "You did NOT send {amount} to {recipient}";
     return [200, fail];
 });

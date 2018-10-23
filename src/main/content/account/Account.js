@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withStyles} from '@material-ui/core/styles';
+import axios from 'axios/index';
 import {FusePageSimple} from '@fuse';
 
 import Table from '@material-ui/core/Table';
@@ -29,11 +30,31 @@ const rows = [
     createData('Fees', none, na, none),
 ];
 
+// /fn/transaction/getLedgerState
 
 class Account extends Component {
 
+    state = {
+        selfHash: '',
+        info: {}
+    };
+
+    componentDidMount()
+    {
+        axios.get('http://localhost:3141/fn/transaction/getSystemInfo').then(res => {
+            console.log(res.data);
+            this.setState({
+                info: res.data,
+                selfHash: res.data.selfHash
+            });
+        });
+        ;
+    }
+
     render()
     {
+        const {info} = this.state;
+        const {selfHash} = this.state;
         const {classes} = this.props;
 
         return (
@@ -45,14 +66,10 @@ class Account extends Component {
                     <div className="p-24"><h4>Holo</h4></div>
                 }
                 contentToolbar={
-                    <div className="px-24"><h4>Account</h4></div>
+                    <div className="px-24"><h4>Account: {selfHash}</h4></div>
                 }
                 content={
                     <div className="p-24">
-                        <p>
-                            Account: Qmc7GEPmhWZJuFuDGDbx8rq1P3h7EqUZB23H2zsBJ9XtXH
-                        </p>
-                        <br/>
                         <h2 className="text-center">Balances (Net of Limits)</h2>
                         <br/>
 
