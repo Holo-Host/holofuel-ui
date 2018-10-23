@@ -55,14 +55,6 @@ class Account extends Component {
         ;
     }
 
-    /*
-    {info[0].map(infoItem => {
-        return (
-            <li>{infoItem}</li>
-        );
-    })}
-    */
-
     render()
     {
         const {maxCreditLimit} = this.state;
