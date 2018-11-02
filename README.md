@@ -24,7 +24,7 @@ You should get a UI at localhost:3000 which uses localhost:3141 as it's back end
 
 ## Screenshot
 
-NOTE: This screenshot is out of date
+**NOTE:** This screenshot is just an example of the application at a particular moment in development and may not represent the current state of development on any particular branch.
 
 [screen]: img/ui.png "screenshot"
 

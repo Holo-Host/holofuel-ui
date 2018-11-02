@@ -4,9 +4,9 @@ import axios from 'axios/index';
 import {FusePageSimple} from '@fuse';
 
 import Table from '@material-ui/core/Table';
+//import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
@@ -43,7 +43,8 @@ class Account extends Component {
 
     componentDidMount()
     {
-        axios.get('http://localhost:3141/fn/transaction/getSystemInfo').then(res => {
+//        axios.get('http://localhost:3141/fn/transaction/getSystemInfo').then(res => {
+        axios.get('http://localhost:10001/fn/transaction/getSystemInfo').then(res => {
             console.log(res.data);
             this.setState({
                 maxCreditLimit: res.data.maxCreditLimit,
@@ -80,18 +81,20 @@ class Account extends Component {
                         <br/>
                         <Paper className={classes.root}>
                             <Table className={classes.table}>
-                                <TableRow>
-                                    <TableCell>maxCreditLimit</TableCell>
-                                    <TableCell>{maxCreditLimit.display}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>maxTransactionAmount</TableCell>
-                                    <TableCell>{maxTransactionAmount.display}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>maxTransactionFee</TableCell>
-                                    <TableCell>{maxTransactionFee.display}</TableCell>
-                                </TableRow>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>maxCreditLimit</TableCell>
+                                        <TableCell>{maxCreditLimit.display}</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>maxTransactionAmount</TableCell>
+                                        <TableCell>{maxTransactionAmount.display}</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>maxTransactionFee</TableCell>
+                                        <TableCell>{maxTransactionFee.display}</TableCell>
+                                    </TableRow>
+                                </TableBody>
                             </Table>
                         </Paper>
                     </div>
